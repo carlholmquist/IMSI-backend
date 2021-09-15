@@ -5,6 +5,7 @@ const knex = require('knex');
 
 const select = require('./controllers/select');
 const add = require('./controllers/add');
+const categorys = require('./controllers/categorys')
 
 const db = knex({
     client: 'pg',
@@ -28,6 +29,8 @@ app.get('/signin', (req,res) => {
 })
 
 app.get('/products', (req,res) => {select.handleProductsreq(req,res,db)})
+app.get('/categorys',(req,res) => {categorys.handleCategorysreq(req,res,db)})
+
 app.post('/addproduct', (req,res) => {add.handleProductadd(req,res,db)})
 
 
