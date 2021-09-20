@@ -17,8 +17,6 @@ const db = knex({
     }
 });
 
-console.log(db);
-
 const app = express();//Initiallizing express as app
 app.use(express.json());//Dont know what this does
 app.use(cors());//Enable cors
@@ -33,6 +31,9 @@ app.get('/categorys',(req,res) => {categorys.handleCategorysreq(req,res,db)})
 
 app.post('/addproduct', (req,res) => {add.handleProductadd(req,res,db)})
 
+app.get('/locations', (req,res) => {
+    db.select('location_id').from('locations').then(locations => res.json(locations));
+})
 
 app.listen( 3500 ,() => {
     console.log(`App is running on port ${process.env.PORT}`); //Somewhy port undefined?
