@@ -6,6 +6,7 @@ const knex = require('knex');
 const select = require('./controllers/select');
 const add = require('./controllers/add');
 const categorys = require('./controllers/categorys')
+const quantity = require('./controllers/quantity');
 
 const db = knex({
     client: 'pg',
@@ -30,6 +31,7 @@ app.get('/products', (req,res) => {select.handleProductsreq(req,res,db)})
 app.get('/categorys',(req,res) => {categorys.handleCategorysreq(req,res,db)})
 
 app.post('/addproduct', (req,res) => {add.handleProductadd(req,res,db)})
+app.post('/quantity', (req,res) => {quantity.handleQuantity(req,res,db)})
 
 app.get('/locations', (req,res) => {
     db.select('location_id').from('locations').then(locations => res.json(locations));
